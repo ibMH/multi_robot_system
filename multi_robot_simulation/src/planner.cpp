@@ -7,7 +7,7 @@ Planner::Planner(ros::NodeHandle &nh):nh(nh)
     this->frame_name="/map";
 
     this->tim_sampling=this->nh.createTimer(ros::Duration(0.05),&Planner::plan,this);
-    
+
     this->pub_current_odometry=nh.advertise<nav_msgs::Odometry>("/trajectory_odom",10);
     this->set_start_service=nh.advertiseService("start_planner",&Planner::srv_start,this);
     this->set_stop_service=nh.advertiseService("stop_planner",&Planner::srv_stop,this);
@@ -535,5 +535,5 @@ void StepResposePlanner::check_period(ros::Duration time)
         this->iterations_counter++;
         this->pos_old_=this->pos_new_;
         this->ori_old_=this->ori_new_;
-    }
+    }   
 }

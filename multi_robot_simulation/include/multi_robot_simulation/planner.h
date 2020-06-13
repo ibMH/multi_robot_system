@@ -1,3 +1,8 @@
+#ifndef PLANNER_H
+#define PLANNER_H
+
+
+
 #include<ros/ros.h>
 #include<tf/tf.h>
 #include<math.h>
@@ -278,3 +283,8 @@ class StepResposePlanner:public Planner
         tf::Quaternion ori_old_;
         tf::Quaternion ori_new_;
 };
+
+
+
+
+#endif

@@ -56,6 +56,7 @@ add_message_files(
   ControlData.msg
   ControlDifference.msg
   Formation.msg
+  PathVelocities.msg
 )
 
 ## Generate services in the 'srv' folder

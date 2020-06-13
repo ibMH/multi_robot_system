@@ -135,6 +135,8 @@ include_directories(
 add_library(planner
   include/${PROJECT_NAME}/planner.h
   src/planner.cpp
+  include/${PROJECT_NAME}/primitive_planner.h 
+  src/primitive_planner.cpp
 )
 
 
@@ -151,6 +153,7 @@ add_executable(planner_node src/planner_node.cpp)
 add_executable(measurement_node src/measurement_node.cpp)
 add_executable(system_handling_node src/system_handling_node.cpp)
 add_executable(spiral_node src/spiral_node.cpp)
+add_executable(primitive_node src/primitive_node.cpp)
 
 
 
@@ -182,6 +185,10 @@ target_link_libraries(measurement_node
 )
 
 target_link_libraries(system_handling_node
+  planner
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(primitive_node
   planner
   ${catkin_LIBRARIES}
 )

@@ -4,20 +4,24 @@
   <arg name="filename" default="test"/>
 
  
-<!-- 
-  <include file="$(find multi_robot_launcher)/launch/gazebo.launch">
-    <arg name="world_name" value="$(find multi_robot_launcher)/worlds/empty_world_camera.world"/>
-    <arg name="paused" value="true" />
-    <arg name="gui" value="false" />
-  </include> -->
 
   <!-- Load the formation parameter file-->
   <rosparam file="$(find multi_robot_launcher)/config/formation.yaml" command="load"></rosparam>
+
+  <!-- Load the gazebo simualtion environment-->
+  <include file="$(find multi_robot_launcher)/launch/gazebo.launch">
+    <arg name="world_name" value="$(find multi_robot_launcher)/worlds/empty_world.world"/>
+    <arg name="paused" value="true" />
+    <arg name="gui" value="true" />
+    <arg name="recording" value="false"/>
+    <arg name="verbose" value="true"/>
+  </include>
+
   <!-- Setting up the Formation of robots -->
   <include file="$(find multi_robot_launcher)/launch/formation.launch"></include>
 
-  <!-- Setting up the record system-->
-  <!-- <node name="record_system" pkg="rosbag" type="record" args="record -O /tmp/$(arg filename).bag -a"/> -->
-  <node name="record_system_trajectories" pkg="rosbag" type="record" args="record -O  /tmp/$(arg filename)_Trajectories.bag -e /trajectory_odom | /robot(.*) | /master(.*)"/>
-
+  <!-- Recording data-->
+  <include file="$(find multi_robot_launcher)/launch/record.launch">
+    <arg name="filename" value="$(arg filename)"/>
+  </include>
 </launch>
