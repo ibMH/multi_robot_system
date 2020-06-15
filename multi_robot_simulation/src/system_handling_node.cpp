@@ -5,6 +5,7 @@
 #include <std_srvs/Empty.h>
 #include <tf/tf.h>
 #include <multi_robot_simulation/planner.h>
+#include <multi_robot_simulation/primitive_planner.h>
 
 Planner* planner;
 tf::Pose reference;
@@ -139,6 +140,12 @@ void startPlanner(ros::NodeHandle nh)
         {
             ROS_INFO("Starting StepResponse Planner");
             planner=new StepResposePlanner(nh_planner);
+            break;
+        }
+        case 5:
+        {
+            ROS_INFO("Starting Primitive Planner");
+            planner=new PrimitivePlanner(nh_planner);
             break;
         }
 

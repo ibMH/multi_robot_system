@@ -5,18 +5,15 @@
 
 PrimitivePlanner::PrimitivePlanner(ros::NodeHandle &nh):Planner(nh),time_offset_(0.0),index_of_primitive_(0)
 {
-    this->list_of_primitives_.push_back(new LinePrimitive(0.1,0.7,4));
-    this->list_of_primitives_.push_back(new CirclePrimitive(0.1,0.7,3,1.57));    
-    this->list_of_primitives_.push_back(new LinePrimitive(0.1,0.7,4));
-    this->list_of_primitives_.push_back(new CirclePrimitive(0.1,0.7,3,1.57));    
-    this->list_of_primitives_.push_back(new LinePrimitive(0.1,0.7,4));
-    this->list_of_primitives_.push_back(new CirclePrimitive(0.1,0.7,3,1.57));    
-    this->list_of_primitives_.push_back(new LinePrimitive(0.1,0.7,4));
-    this->list_of_primitives_.push_back(new CirclePrimitive(0.1,0.7,3,1.57));    
-    this->list_of_primitives_.push_back(new LinePrimitive(0.1,0.7,4));
-    this->list_of_primitives_.push_back(new CirclePrimitive(0.1,0.7,3,1.57));    
-    this->list_of_primitives_.push_back(new LinePrimitive(0.1,0.7,4));
-    this->list_of_primitives_.push_back(new CirclePrimitive(0.1,0.7,3,1.57));    
+    this->list_of_primitives_.push_back(new LinePrimitive(0.1,0.5,4));
+    this->list_of_primitives_.push_back(new CirclePrimitive(0.1,0.5,3,1.57));    
+    this->list_of_primitives_.push_back(new LinePrimitive(0.1,0.5,4));
+    this->list_of_primitives_.push_back(new CirclePrimitive(0.1,0.5,3,1.57));    
+    this->list_of_primitives_.push_back(new LinePrimitive(0.1,0.5,4));
+    this->list_of_primitives_.push_back(new CirclePrimitive(0.1,0.5,3,1.57));    
+    this->list_of_primitives_.push_back(new LinePrimitive(0.1,0.5,4));
+    this->list_of_primitives_.push_back(new CirclePrimitive(0.1,0.5,3,1.57));   
+
     this->current_it_=this->list_of_primitives_.begin();
     this->current_primitive_=*(this->current_it_);
     
@@ -80,7 +77,7 @@ int PrimitivePlanner::lookupIndexTime(double time)
 }
 bool PrimitivePlanner::checkCompatibility(std::list<Primitive*> list)
 {
-    list.front()->interpolate(0.1);
+    list.front()->interpolate(0.01);
     tf::Transform last_position=list.front()->getPosition().back();
     double last_vel=list.front()->getVelocity().back().length();
     bool succeed=true;
@@ -89,7 +86,7 @@ bool PrimitivePlanner::checkCompatibility(std::list<Primitive*> list)
     {
         (*element)->start_vel_=last_vel;
         (*element)->start_point_=last_position;
-        if(!(*element)->interpolate(0.1))
+        if(!(*element)->interpolate(0.01))
         {
             succeed=false;
         }
@@ -148,6 +145,12 @@ int PrimitivePlanner::Primitive::getSize()
 {
     return this->positions_.size();
 }
+
+
+
+
+
+
 
 PrimitivePlanner::LinePrimitive::LinePrimitive(double accel,double vel_max,double length):
                                                                                             accel_(accel),

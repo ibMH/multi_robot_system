@@ -1,6 +1,6 @@
 # -----------------------------------
 planner: 
-  type: 0        #0->lissajous 1->circle 2->clickedPose 3->spiral 4->StepResponse
+  type: 5        #0->lissajous 1->circle 2->clickedPose 3->spiral 4->StepResponse 5->primitive planner
   pause: false
   iterations: 3
   reference:  [1. , 1. , 0, 0 ,0 ,0 ]    #X Y Z R P Y
